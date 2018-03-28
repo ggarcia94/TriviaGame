@@ -8,7 +8,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     
     <!-- Added a link to Bootstrap-->
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
         crossorigin="anonymous">
 
     <!-- Added a link to our CSS-->
@@ -17,9 +17,21 @@
 
 </head>
 <body>
-    <h1>Trivia Game</h1>
-    <div id="questions"></div>
+    <div class="jumbotron">
+            <h1 class="text-center">U.S. State Capitals Trivia Game</h1>
+    </div>
 
+    <div>
+        <h2 id="correct" ></h2>
+        <h2 id="incorrect"></h2>
+        <h2 id="noAnswer"></h2>
+    </div>
+   
+    
+    <div id="questions"></div>
+    <br><br>
+    <button id="button-submit" class="btn btn-dark clear" value="submit"><h1>Submit</h1></button>
+    <button id="button-restart" class="btn btn-dark clear" value="restart"><h1>Restart</h1></button>   
 
 <!-- Script -->
 <script type="text/javascript" src="assets/javascript/app.js"></script>  
