@@ -3,14 +3,14 @@ $(document).ready(function() {
 //Variables
 var questions = [
     {
-        text: "What is the Capital of California?",
-        answer: "Sacramento",
-        options: ["San Francisco", "Sacramento", "Los Angeles"],
+        text: "What is the Capital of Alabama?",
+        answer: "Montgomery",
+        options: ["Birmingham", "Montgomery", "Huntsville"],
     },
     {
-        text: "What is the Capital of Washington?",
-        answer: "Olympia",
-        options: ["Olympia", "Seattle", "Spokane"],
+        text: "What is the Capital of Alaska?",
+        answer: "Juneau",
+        options: ["Anchorage", "Juneau", "Fairbanks"],
     },
     {
         text: "What is the Capital of Arizona?",
@@ -18,9 +18,29 @@ var questions = [
         options: ["Mesa", "Phoenix", "Tucson"],
     },
     {
+        text: "What is the Capital of Arkansas?",
+        answer: "Little Rock",
+        options: ["Little Rock", "Fayetteville", "Springdale"],
+    },    
+    {
+        text: "What is the Capital of California?",
+        answer: "Sacramento",
+        options: ["San Francisco", "Sacramento", "Los Angeles"],
+    },
+    {
+        text: "What is the Capital of Colorado?",
+        answer: "Denver",
+        options: ["Denver", "Colorado Springs", "Fort Collins"],
+    },
+    {
+        text: "What is the Capital of Washington?",
+        answer: "Olympia",
+        options: ["Olympia", "Seattle", "Spokane"],
+    },
+    {
         text: "What is the Capital of Texas?",
         answer: "Austin",
-        options: ["Huston", "Dallas", "Austin"],
+        options: ["Houston", "Dallas", "Austin"],
     },
     {
         text: "What is the Capital of Rhode Island?",
@@ -43,20 +63,28 @@ var questions = [
         options: ["Naperville", "Chicago", "Springfield"],
     },
     {
-        text: "What is the Capital of Colorado?",
-        answer: "Denver",
-        options: ["Denver", "Colorado Springs", "Fort Collins"],
-    },
-    {
         text: "What is the Capital of Maine?",
         answer: "Augusta",
         options: ["Portland", "Augusta", "Kennebunk"],
-    }
+    },
+    {
+        text: "What is the Capital of North Carolina?",
+        answer: "Charlotte",
+        options: ["Raleigh", "Charlotte", "Greensboro"],
+    },
+    {
+        text: "What is the Capital of Michigan?",
+        answer: "Lansing",
+        options: ["Lansing", "Detroit", "Grand Rapids"],
+    },    
 ];
-console.log(questions);
+
 var correct = 0;
 var incorrect = 0;
 var noAnswer = 0;
+var intervalId;
+var counter = 60;
+var submit = false;
 
 function questionSetup () {
     correct = 0;
@@ -90,37 +118,63 @@ function questionSetup () {
     }
 }
 
-questionSetup();
-
 function score() {
-    console.log("Correct: " + correct);
-    console.log("Incorrect: " + incorrect);
-    console.log("Not Answered: " + noAnswer);
-    $("#correct").text("Correct: " + correct);
-    $("#incorrect").text("Incorrect: " + incorrect);
-    $("#noAnswer").text("Not Answered: " + noAnswer);
-}
+    submit = true;
 
-$("#button-submit").on("click", function(event) {
     for (var i = 0; i < questions.length; i++) {
         var choice = $('input[name="'+ i +'"]:checked').val();
         if (choice === questions[i].answer){
             correct++;
         } else if (choice === undefined) {
             noAnswer++;
+            incorrect++;
         } else {
             incorrect++;
         }
     }
-    score();
+
+    $("#correct").text("Correct: " + correct);
+    $("#incorrect").text("Incorrect: " + incorrect);
+    $("#noAnswer").text("Not Answered: " + noAnswer);
+}
+
+function run() {
+    intervalId = setInterval(decrement, 1000);
+}
+
+function decrement() {
+    counter--;
+    $("#counter").text("Timer: " + counter);
+    if (counter === 0) {
+      stop();
+      score();
+      $("#questions").empty();
+    }
+} 
+
+function stop() {
+    clearInterval(intervalId);
+    $("#counter").text("");
+}
+
+$("#button-submit").on("click", function(event) {
+    if (submit === false) {
+        stop();
+        score();
+        $("#questions").empty();
+    }
 });
 
 $("#button-restart").on("click", function(event) { 
-    console.log("Restart Clicked")
+    $("#questions").empty();
+    submit = false;
+    counter = 60;
+    stop();
     questionSetup();
-
+    run();
 });
 
-
+questionSetup();
+run();
 
 });

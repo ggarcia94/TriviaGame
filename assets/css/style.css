@@ -1,0 +1,28 @@
+h1 {
+    font-size: 50px;
+    color: white;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+h2 {
+    font-size: 40px;
+    color: blue;
+}
+
+h3 {
+    font-weight: bold;
+}
+
+.jumbotron {
+    background: red;
+}
+
+#questions {
+    font-size: 20px;
+    color: blue;
+}
+
+#counter {
+    font-size: 30px;
+    color: red;
+}
